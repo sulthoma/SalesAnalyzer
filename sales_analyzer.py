@@ -232,3 +232,4 @@ if __name__ == "__main__":
 
 # Project update: Practising Git version control
 # Feature branch: Working on report export
+# Feature branch: Sales summary report
