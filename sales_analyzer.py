@@ -229,3 +229,5 @@ if __name__ == "__main__":
     products = read_products("products.csv")
     report = generate_sales_report(products)
     print_sales_report(report)
+
+# Project update: Practising Git version control
