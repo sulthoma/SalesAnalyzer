@@ -10,9 +10,9 @@ from sales_analyzer import (
     find_best_selling_product,
     find_best_selling_by_quantity,
     validate_products,
-    read_products
+    read_products,
+    generate_sales_report
 )
-
 
 class TestSalesAnalyzer(unittest.TestCase):
 
@@ -274,6 +274,22 @@ class TestSalesAnalyzer(unittest.TestCase):
             self.temp_filename = file.name
 
         self.assertTrue(os.path.exists(self.temp_filename))
+
+    def test_generate_sales_report_empty(self):
+        report = generate_sales_report([])
+
+        self.assertEqual(report["total_revenue"], 0)
+        self.assertIsNone(report["average_revenue"])
+        self.assertEqual(report["total_products"], 0)
+
+        self.assertIsNone(
+        report["best_selling_product"]["product name"]
+    )
+        self.assertIsNone(
+        report["best_selling_by_quantity"]["product"]
+    )
+
+        self.assertEqual(report["product_ranking"], [])
 
     
 
