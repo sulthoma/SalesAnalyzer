@@ -319,7 +319,33 @@ class TestSalesAnalyzer(unittest.TestCase):
 
                 with self.assertRaises((ValueError, TypeError)):
                     calculate_total_revenue(products)
-           
+
+    def test_generate_sales_report_with_products(self):
+        products = [
+            {"product": "Laptop", "quantity": 2, "price": 500},
+            {"product": "Mouse", "quantity": 3, "price": 20}
+        ]
+
+        report = generate_sales_report(products)
+
+        self.assertEqual(report["total_revenue"], 1060)
+        self.assertEqual(report["average_revenue"], 530)
+        self.assertEqual(report["total_products"], 2)
+
+        self.assertEqual(
+            report["best_selling_product"]["product name"],
+            "Laptop"
+        )
+        self.assertEqual(
+            report["best_selling_by_quantity"]["product"],
+            "Mouse"
+        )
+
+        self.assertEqual(
+            report["product_ranking"],
+            [(1, "Laptop", 1000), (2, "Mouse", 60)]
+        )
+
 
 if __name__ == "__main__":
-    unittest.main()
+   unittest.main()
