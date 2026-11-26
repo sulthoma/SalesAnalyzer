@@ -11,6 +11,7 @@ from sales_analyzer import (
     find_best_selling_by_quantity,
     validate_products,
     read_products,
+    sort_products_by_revenue,
     generate_sales_report
 )
 
@@ -264,7 +265,6 @@ class TestSalesAnalyzer(unittest.TestCase):
         with self.assertRaises(TypeError):
             calculate_average_revenue(products)
 
-
     def test_temporary_file_cleanup(self):
         with tempfile.NamedTemporaryFile(
         mode="w", suffix=".csv", delete=False
@@ -346,6 +346,19 @@ class TestSalesAnalyzer(unittest.TestCase):
             [(1, "Laptop", 1000), (2, "Mouse", 60)]
         )
 
+    def test_sort_products_by_revenue_with_tie(self):
+        products = [
+            {"product": "Laptop", "quantity": 2, "price": 500},
+            {"product": "Monitor", "quantity": 1, "price": 1000},
+            {"product": "Mouse", "quantity": 3, "price": 20}
+        ]
+
+        result = sort_products_by_revenue(products)
+
+        self.assertEqual(
+            result,
+            [("Laptop", 1000), ("Monitor", 1000), ("Mouse", 60)]
+        )
 
 if __name__ == "__main__":
    unittest.main()
