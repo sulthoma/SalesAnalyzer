@@ -224,6 +224,12 @@ def print_sales_report(report):
             print(f"{rank}. {product} - ₹{revenue}")
     print("==============================================")
 
+def export_product_ranking_to_csv(report, filename):
+    with open(filename, mode="w", newline="") as file:
+        writer = csv.writer(file)
+
+        writer.writerow(["rank", "product", "revenue"])
+        writer.writerows(report["product_ranking"])
 
 if __name__ == "__main__":
     products = read_products("products.csv")
